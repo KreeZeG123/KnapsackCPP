@@ -48,3 +48,12 @@ add_executable(BB
     kpSolverBB.cpp
 )
 
+add_executable(testQ11
+    testQ11.cpp
+    kpSolver.cpp
+    matDP.cpp
+    kpSolverDP.cpp
+    kpSolverDPsparseV2.cpp
+    kpSolverGreedy.cpp
+    kpSolverHeurDP.cpp
+)
