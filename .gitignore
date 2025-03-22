@@ -1,0 +1,6 @@
+.vscode
+v1/build/CMakeFiles
+v1/build/.cmake
+v1/build/CMakeCache.txt
+v2/Knapsack/build/CMakeFiles
+v2/Knapsack/build/CMakeCache.txt
