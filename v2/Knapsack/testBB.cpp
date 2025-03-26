@@ -38,7 +38,9 @@ std::string name(  BranchingStrategies b){
         return "DFS01";/*
     case BranchingStrategies::BFS:
         return "BFS";*/
-};
+    default:
+        throw std::invalid_argument( "testBB.cpp:29 : unexpected argurment for name()" );
+    };
 }
 
 void testBBSolvers(const char* instanceFile){

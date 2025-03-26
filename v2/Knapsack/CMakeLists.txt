@@ -57,3 +57,11 @@ add_executable(testQ11
     kpSolverGreedy.cpp
     kpSolverHeurDP.cpp
 )
+
+add_executable(testQ19
+    testQ19.cpp
+    kpSolver.cpp
+    kpSolverDPsparseV2.cpp
+    kpSolverGreedy.cpp
+    kpSolverHeurDP.cpp
+)
