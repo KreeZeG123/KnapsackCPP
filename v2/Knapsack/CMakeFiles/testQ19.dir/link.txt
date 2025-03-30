@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/testQ19.dir/testQ19.cpp.o CMakeFiles/testQ19.dir/kpSolver.cpp.o CMakeFiles/testQ19.dir/kpSolverDPsparseV2.cpp.o CMakeFiles/testQ19.dir/kpSolverGreedy.cpp.o CMakeFiles/testQ19.dir/kpSolverHeurDP.cpp.o -o testQ19 
