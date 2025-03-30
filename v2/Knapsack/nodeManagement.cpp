@@ -90,6 +90,46 @@ NodeBB* Random::selectNode()
 /* BFS Strategy */
 /* ============================================ */
 
+NodeBB* BFSdeque::selectNode() {
+    NodeBB* node = nodes.front();
+    nodes.pop_front();
+    return node;
+}
+
+NodeBB* NMqueue::selectNode() {
+    if (nodes.empty()) {
+        return nullptr;
+    }
+
+    NodeBB* node = nodes.front();
+    nodes.pop();
+    return node;
+}
+
+double NMqueue::getUpperBound() {
+    if (!nodes.empty()) {
+        return nodes.back()->getNodeUpperBound();
+    }
+    return 0.0;
+}
+
+void NMqueue::clear() {
+    while (!nodes.empty()) {
+        NodeBB* node = nodes.front();
+        nodes.pop();
+        delete node;
+    }
+}
+
+NodeBB* BFSfile::selectNode() {
+    if (!nodes.empty()) {
+        NodeBB* node = nodes.front();
+        nodes.pop();
+        return node;
+    }
+    return nullptr;
+}
+
 
 /* ============================================ */
 /* BESTBOUND STRATEGY */

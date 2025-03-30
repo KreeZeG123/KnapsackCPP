@@ -1,4 +1,6 @@
 .vscode
+v1/.vscode
+v2/.vscode
 v1/build/*.o
 v1/build/CMakeFiles
 v1/build/.cmake

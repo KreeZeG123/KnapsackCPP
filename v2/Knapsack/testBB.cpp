@@ -33,11 +33,13 @@ std::string name(  BranchingStrategies b){
     case BranchingStrategies::Random:
         return "Random";
     case BranchingStrategies::DFS10:
-         return "DFS10";
+        return "DFS10";
     case BranchingStrategies::DFS01:
-        return "DFS01";/*
-    case BranchingStrategies::BFS:
-        return "BFS";*/
+        return "DFS01";
+    case BranchingStrategies::BFSdeque:
+        return "BFSdeque";
+    case BranchingStrategies::BFSfile:
+        return "BFSfile";
     default:
         throw std::invalid_argument( "testBB.cpp:29 : unexpected argurment for name()" );
     };
@@ -47,7 +49,7 @@ void testBBSolvers(const char* instanceFile){
 
 //      sss
 
-    vector<BranchingStrategies> bStrategies = { BranchingStrategies::BestBound,  BranchingStrategies::DFS10, BranchingStrategies::DFS01}; // BranchingStrategies::BFS
+    vector<BranchingStrategies> bStrategies = { BranchingStrategies::BestBound,  BranchingStrategies::DFS10, BranchingStrategies::DFS01,  BranchingStrategies::BFSdeque,  BranchingStrategies::BFSfile};
     // BranchingStrategies::Random};
 
 
