@@ -8,7 +8,7 @@
 #include <memory>
 
 
-enum class BranchingStrategies { BestBound,  DFS10, DFS01,// BFS,
+enum class BranchingStrategies { BestBound,  DFS10, DFS01, BFSdeque, BFSfile,
     Random};
 
 /*
@@ -91,10 +91,13 @@ public:
                     break;
         case BranchingStrategies::DFS01:
             nodes = std::make_unique<DFS01>();
-                    break;/*
-        case BranchingStrategies::BFS:
+                    break;
+        case BranchingStrategies::BFSdeque:
             nodes = std::make_unique<BFSdeque>();
-                    break;*/
+                    break;
+        case BranchingStrategies::BFSfile:
+            nodes = std::make_unique<BFSfile>();
+                    break;
     }
     };
     //KpSolverBB(KpSolver * kp):KpSolver(kp){};

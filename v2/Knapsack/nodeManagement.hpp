@@ -7,6 +7,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <queue>
 using namespace std;
 
 class NodeManagement {
@@ -51,6 +52,20 @@ public:
     size_t nbNodes() override { return nodes.size(); }
 };
 
+class NMqueue : public NodeManagement {
+protected:
+    std::queue<NodeBB*> nodes;
+
+public:
+    virtual ~NMqueue() { clear();};
+    virtual void insertNode(NodeBB* nod) override { nodes.push(nod);};
+    virtual NodeBB* selectNode() override;
+    virtual double getUpperBound() override;
+    virtual bool isEmpty() override {return nodes.empty();};
+    virtual void clear() override;
+    virtual size_t nbNodes() override {return nodes.size();};
+};
+
 class RandomOld : public NMdeque {
 public:
     NodeBB* selectNode() override;
@@ -63,7 +78,6 @@ public:
     string to_string() override {return "Random";};
 };
 
-/*
 class BFSdeque : public NMdeque {
 
 public:
@@ -71,7 +85,14 @@ public:
     void insertNode(NodeBB* nod) override {nodes.push_front(nod);};
     string to_string() override {return "BFSdeque";};
 };
-*/
+
+class BFSfile : public NMqueue {
+public:
+    NodeBB* selectNode() override;
+    void insertNode(NodeBB* nod) override {nodes.push(nod);};
+    string to_string() override { return "BFSfile"; };
+};
+
 
 class BestBoundOld : public NMdeque {
 
