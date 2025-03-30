@@ -9,3 +9,5 @@ v2/Knapsack/*.o
 v2/Knapsack/CMakeFiles
 v2/Knapsack/CMakeFiles/*
 v2/Knapsack/CMakeCache.txt
+v2/Knapsack/Makefile
+v2/Knapsack/cmake_install.cmake
