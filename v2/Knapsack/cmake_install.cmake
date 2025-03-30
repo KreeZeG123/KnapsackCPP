@@ -1,4 +1,4 @@
-# Install script for directory: /home/etud/Documents/Universite/M1/Projet/sac_a_dos_opti_combinatoire/KnapsackCPP/v2/Knapsack
+# Install script for directory: /home/etud/Documents/KnapsackCPP/v2/Knapsack
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/etud/Documents/Universite/M1/Projet/sac_a_dos_opti_combinatoire/KnapsackCPP/v2/Knapsack/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/etud/Documents/KnapsackCPP/v2/Knapsack/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

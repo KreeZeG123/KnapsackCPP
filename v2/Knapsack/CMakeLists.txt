@@ -65,3 +65,14 @@ add_executable(testQ18
     kpSolverGreedy.cpp
     kpSolverHeurDP.cpp
 )
+
+add_executable(testQ23
+    testQ23.cpp
+    kpSolverBB.cpp
+    kpSolverGreedy.cpp
+    kpSolverHeurDP.cpp
+    kpSolver.cpp
+    nodeBB.cpp
+    kpSolverDPsparseV2.cpp
+    nodeManagement.cpp
+)
