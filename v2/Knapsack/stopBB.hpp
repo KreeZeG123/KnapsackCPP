@@ -3,7 +3,7 @@
 #pragma once
 
 #include "kpDefs.hpp"
-
+#include <chrono>
 
 
 //TODO: rajouter limite de temps? epagap, eprgap,
@@ -47,3 +47,27 @@ public:
      NodeMemLim(size_t n1,size_t n2): nbMaxNodeBB(n1),nbMaxNodeInMemory(n2) {};
 };
 */
+
+class TimeLimit : public StopCriterionBB {
+    private:
+        std::chrono::duration<double> limiteTemps;
+    public:
+         bool continueBB(std::chrono::duration<double> temps) override{return limiteTemps <  temps;};
+         TimeLimit(std::chrono::duration<double> limite): limiteTemps(limite) {};
+    };
+
+class RelativeCode : public StopCriterionBB {
+    private:
+        float limGapPourcentage;
+    public:
+            bool continueBB(double upperBound, double lowerBound) override{return lowerBound/upperBound <= limGapPourcentage;};
+            RelativeCode(float g): limGapPourcentage(g) {};
+    };
+
+class AbsoluteCode : public StopCriterionBB {
+    private:
+        float limGapAbsolute;
+    public:
+            bool continueBB(double upperBound, double lowerBound) override{return upperBound-lowerBound <= limGapAbsolute;};
+            AbsoluteCode(float g): limGapAbsolute(g) {};
+    };
