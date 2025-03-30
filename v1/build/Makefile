@@ -1,16 +1,22 @@
-all: testProgDyn testHeur testBB testIterHeur testQ4
+all: testProgDyn testHeur testIterHeur testBB testQ4 testQ8 testQ9
+
+testQ9: KpSolver.o KpSolverDP.o NodeBB.o KpSolverHeurDP.o KpSolverGreedy.o KpSolverBB.o KpSolverGreedyFractional.o ../test/testQ9.cpp
+	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverGreedy.o NodeBB.o KpSolverHeurDP.o KpSolverBB.o KpSolverGreedyFractional.o ../test/testQ9.cpp -o testQ9
+
+testQ8: KpSolver.o KpSolverDP.o NodeBB.o KpSolverHeurDP.o KpSolverGreedy.o KpSolverBB.o KpSolverGreedyFractional.o ../test/testQ8.cpp
+	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverGreedy.o NodeBB.o KpSolverHeurDP.o KpSolverBB.o KpSolverGreedyFractional.o ../test/testQ8.cpp -o testQ8
 
 testQ4: KpSolver.o KpSolverDP.o NodeBB.o KpSolverHeurDP.o KpSolverGreedy.o KpSolverBB.o ../test/testQ4.cpp
 	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverGreedy.o NodeBB.o KpSolverHeurDP.o KpSolverBB.o ../test/testQ4.cpp -o testQ4
-
-testIterHeur: KpSolver.o KpSolverDP.o  KpSolverHeurDP.o KpSolverGreedy.o ../test/testIterHeur.cpp
-	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverHeurDP.o KpSolverGreedy.o ../test/testIterHeur.cpp -o testIterHeur
-
+	
 testBB: KpSolver.o KpSolverDP.o NodeBB.o KpSolverHeurDP.o KpSolverGreedy.o KpSolverBB.o ../test/testBB.cpp
 	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverGreedy.o NodeBB.o KpSolverHeurDP.o KpSolverBB.o ../test/testBB.cpp -o testBB
 
-testHeur: KpSolver.o KpSolverDP.o  KpSolverHeurDP.o KpSolverGreedy.o ../test/testHeur.cpp
-	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverHeurDP.o KpSolverGreedy.o ../test/testHeur.cpp -o testHeur
+testIterHeur: KpSolver.o KpSolverDP.o  KpSolverHeurDP.o KpSolverGreedy.o KpSolverGreedyFractional.o ../test/testIterHeur.cpp
+	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverHeurDP.o KpSolverGreedy.o ../test/testIterHeur.cpp -o testIterHeur
+
+testHeur: KpSolver.o KpSolverDP.o  KpSolverHeurDP.o KpSolverGreedy.o KpSolverGreedyFractional.o ../test/testHeur.cpp
+	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o KpSolverHeurDP.o KpSolverGreedy.o KpSolverGreedyFractional.o ../test/testHeur.cpp -o testHeur
 
 testProgDyn:  KpSolver.o KpSolverDP.o ../test/testProgDyn.cpp
 	g++ -O3 -W -I../src KpSolver.o KpSolverDP.o ../test/testProgDyn.cpp -o testProgDyn 
@@ -32,6 +38,9 @@ KpSolverDP.o: ../src/kpSolverDP.cpp
 
 KpSolver.o: ../src/kpSolver.cpp
 	g++ -o KpSolver.o -O3 -W -c -I../src ../src/kpSolver.cpp
+
+KpSolverGreedyFractional.o: ../src/kpSolverGreedyFractional.cpp
+	g++ -o KpSolverGreedyFractional.o -O3 -W -c -I../src ../src/kpSolverGreedyFractional.cpp
 
 clean:
 	rm -rf *.o
