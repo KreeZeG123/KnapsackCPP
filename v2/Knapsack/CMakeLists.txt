@@ -58,8 +58,8 @@ add_executable(testQ11
     kpSolverHeurDP.cpp
 )
 
-add_executable(testQ19
-    testQ19.cpp
+add_executable(testQ18
+    testQ18.cpp
     kpSolver.cpp
     kpSolverDPsparseV2.cpp
     kpSolverGreedy.cpp
