@@ -1,5 +1,7 @@
 #include "kpSolverHeurDP.hpp"
 #include "kpSolverGreedy.hpp"
+#include "kpSolverGreedyFractional.hpp"
+
 #include <chrono>
 
 using namespace std;
@@ -32,6 +34,23 @@ int main(int argc, char** argv) {
     std::chrono::duration<double> elapsed_seconds = end-start;
     std::cout << "elapsed time: " << elapsed_seconds.count() << "s" << endl<< endl;
     kpGreedy.printKnapsackSolution(false);
+
+
+    KpSolverGreedyFractional KpGreedyFractional;
+    KpGreedyFractional.importInstance(instanceFile);
+    //KpGreedyFractional.extractSubInstance(0,1000);
+
+    if (verboseMode) KpGreedyFractional.printKnapsackInstance();
+
+    cout  << endl << "Greedy bounds :"  << endl << endl;
+
+    start = std::chrono::steady_clock::now();
+    KpGreedyFractional.solve();
+    end = std::chrono::steady_clock::now();
+    elapsed_seconds = end-start;
+    std::cout << "elapsed time: " << elapsed_seconds.count() << "s" << endl<< endl;
+    KpGreedyFractional.printKnapsackSolution(false);
+
 
     KpSolverHeurDP kpHeurDP;
 

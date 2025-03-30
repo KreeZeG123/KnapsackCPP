@@ -82,6 +82,7 @@ void KpSolver::printKnapsackSolution(bool printSol)
 	cout << "solution cost : " << costSolution << endl;
 	cout << "proven upper bound  : " << upperBoundOPT << endl;
 	cout << "proven upper bound  after rounding: " << floor(upperBoundOPT) << endl;
+	
 
 	cout << "gap : " << (floor(upperBoundOPT) - (double)costSolution) / ((double)costSolution) * 100 << "%" << endl;
 

@@ -6,8 +6,6 @@
 #include "kpSolver.hpp"
 
 class  KpSolverGreedyFractional : public KpSolver {
-
-
 public:
 
     void solveLowerBound();
