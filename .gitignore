@@ -12,4 +12,6 @@ v2/Knapsack/cmake_install.cmake
 v2/Knapsack/BB
 v2/Knapsack/DP
 v2/Knapsack/Heur
-v2/Knapsack/TestQ*
+v2/Knapsack/testQ*
+!v2/Knapsack/testQ*.cpp
+!v2/Knapsack/testQ*.hpp
