@@ -47,7 +47,7 @@ bool KpSolverBB::continueBB(size_t nbNod, size_t nbNodMem)
     return true;
     */
     for(size_t i(0); i< bbParams.term.size(); i++)
-        if (bbParams.term[i]->continueBB(nbNod, nbNodMem)) return false;
+        if (bbParams.term[i]->continueBB(nbNod, nbNodMem, nodes.get())) return false;
     return true;
 
 }
