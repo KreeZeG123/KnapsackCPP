@@ -35,6 +35,7 @@ public:
     virtual NodeBB* selectNode() override;
     virtual void insertNode(NodeBB* nod) override {nodes.push_back(nod);};
     virtual double getUpperBound() override;
+    virtual double getLowerBound() override {return 0;};
     bool isEmpty() override { return nodes.empty(); }
     void clear() override { for (auto it : nodes)  delete it;  nodes.clear(); }
     size_t nbNodes() override { return nodes.size(); }
@@ -48,6 +49,7 @@ public:
     NodeBB* selectNode() override;
     virtual void insertNode(NodeBB* nod) override {nodes.push_back(nod);};
     virtual double getUpperBound() override;
+    virtual double getLowerBound() override {return 0;};
     bool isEmpty() override { return nodes.empty(); }
     void clear() override { for (auto it : nodes)  delete it;  nodes.clear(); }
     size_t nbNodes() override { return nodes.size(); }
@@ -62,6 +64,7 @@ public:
     virtual void insertNode(NodeBB* nod) override { nodes.push(nod);};
     virtual NodeBB* selectNode() override;
     virtual double getUpperBound() override;
+    virtual double getLowerBound() override {return 0;};
     virtual bool isEmpty() override {return nodes.empty();};
     virtual void clear() override;
     virtual size_t nbNodes() override {return nodes.size();};
