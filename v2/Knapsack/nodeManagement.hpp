@@ -20,6 +20,7 @@ public:
     virtual void insertNodes(NodeBB* nod1, NodeBB* nod2);
     virtual NodeBB* selectNode() = 0;
     virtual double getUpperBound() = 0;
+    virtual double getLowerBound() = 0;
     virtual bool isEmpty() = 0;
     virtual void clear() = 0;
     virtual size_t nbNodes() = 0;

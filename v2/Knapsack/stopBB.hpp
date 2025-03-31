@@ -1,15 +1,15 @@
 //********* stopBB.hpp *********
-
 #pragma once
 
 #include "kpDefs.hpp"
 #include <chrono>
 #include <cmath>
+#include <vector>
 
 class StopCriterionBB {
 public:
-    virtual ~StopCriterionBB() {}
-    virtual bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound = 0, double upperBound  = 0, std::chrono::duration<double> temps = std::chrono::duration<double>::zero())= 0;
+    virtual ~StopCriterionBB() = default;
+    virtual bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) = 0;
 };
 
 class MemLim : public StopCriterionBB {
@@ -17,8 +17,8 @@ private:
     size_t nbMaxNodeInMemory;
 
 public:
-    MemLim(size_t n) : nbMaxNodeInMemory(n) {}
-    bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override {
+    explicit MemLim(size_t n) : nbMaxNodeInMemory(n) {}
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) override {
         return nbNodMem < nbMaxNodeInMemory;
     }
 };
@@ -26,10 +26,10 @@ public:
 class NodeLim : public StopCriterionBB {
 private:
     size_t nbMaxNodeBB;
-
+    
 public:
-    NodeLim(size_t n) : nbMaxNodeBB(n) {}
-    bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override {
+    explicit NodeLim(size_t n) : nbMaxNodeBB(n) {}
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) override {
         return nbNod < nbMaxNodeBB;
     }
 };
@@ -39,8 +39,10 @@ private:
     double absGap;
 
 public:
-    AbsGapLim(double gap) : absGap(gap) {}
-    bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override {
+    explicit AbsGapLim(double gap) : absGap(gap) {}
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) override {
+        double upperBound = nodes->getUpperBound();
+        double lowerBound = nodes->getLowerBound();
         return (upperBound - lowerBound) > absGap;
     }
 };
@@ -50,21 +52,31 @@ private:
     double relGap;
 
 public:
-    RelGapLim(double gap) : relGap(gap) {}
-    bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override {
+    explicit RelGapLim(double gap) : relGap(gap) {}
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) override {
+        double upperBound = nodes->getUpperBound();
+        double lowerBound = nodes->getLowerBound();
         if (upperBound == 0) return false;
+
         double gap = (upperBound - lowerBound) / upperBound;
         return gap > relGap;
     }
 };
 
+
 class TimeLimit : public StopCriterionBB {
-    private:
-        std::chrono::duration<double> limiteTemps;
-    public:
-        bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override{return limiteTemps <  temps;};
-        TimeLimit(std::chrono::duration<double> limite): limiteTemps(limite) {};
-    };
+private:
+    std::chrono::duration<double> limiteTemps;
+    std::chrono::time_point<std::chrono::steady_clock> start;
+
+public:
+    explicit TimeLimit(std::chrono::duration<double> limite) 
+        : limiteTemps(limite), start(std::chrono::steady_clock::now()) {}
+
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement* nodes) override {
+        return (std::chrono::steady_clock::now() - start) < limiteTemps;
+    }
+};
 
 class CombinedStopCriterion : public StopCriterionBB {
 private:
@@ -75,9 +87,9 @@ public:
         criteria.push_back(criterion);
     }
 
-    bool continueBB(size_t nbNod, size_t nbNodMem, double lowerBound, double upperBound, std::chrono::duration<double> temps) override {
-        for (auto& criterion : criteria) {
-            if (!criterion->continueBB(nbNod, nbNodMem, lowerBound, upperBound, temps)) {
+    bool continueBB(size_t nbNod, size_t nbNodMem, NodeManagement * nodes) override {
+        for (const auto& criterion : criteria) {
+            if (!criterion->continueBB(nbNod, nbNodMem, nodes)) {
                 return false; 
             }
         }
